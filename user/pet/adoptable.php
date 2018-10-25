@@ -1,4 +1,12 @@
+<?php require_once("../../core/session.php"); ?>
+<?php require_once("../../core/config.php"); ?>
 <?php include("../../layout/head2.php");  ?>
+<?php
+$keyword = "";
+if(isset($_POST['keyword'])) {
+$keyword = $_POST['keyword'];
+}
+ ?>
   <style type="text/css">
     /* Necessary for full page carousel*/
     html,
@@ -29,22 +37,16 @@
 
 <main class="mt-5 pt-5 pb-5">
     <div class="container">
-
-
-      <!--Section: Main info-->
-
-
-
       <!--Section: Main features & Quick Start-->
       <section class="mb-5">
             <h2 class="font-weight-bold mt-lg-5 mb-5 pb-4"><strong>Adoptable Pets</strong></h2>
             <section class="mb-5">
               <!-- Search form -->
               <label for="textInput">Search</label>
-              <input type="text" id="textInput" class="form-control mb-4" placeholder="Text input">
+              <input type="text" id="keyword" name="keyword" class="form-control mb-4" placeholder="Text input">
               <div class="row">
               <div class="col-md-4">
-                <label for="select">Default select</label>
+                <label for="select">Type/label>
                 <select class="browser-default custom-select mb-4" id="select">
                   <option value="" disabled="" selected="">Choose your option</option>
                   <option value="1">Option 1</option>
@@ -53,7 +55,7 @@
                 </select>
               </div>
               <div class="col-md-4">
-                <label for="select">Default select</label>
+                <label for="select">Location</label>
                 <select class="browser-default custom-select mb-4" id="select">
                   <option value="" disabled="" selected="">Choose your option</option>
                   <option value="1">Option 1</option>
@@ -70,7 +72,7 @@
                   <div class="row">
                     <?php
                     include_once("../../core/config.php");
-                    $sql = "SELECT * FROM tbl_pets";
+                    $sql = "SELECT * FROM tbl_pets ";
                     $resultset = mysqli_query($connect, $sql) or die("database error:". mysqli_error($conn));
                     while( $record = mysqli_fetch_assoc($resultset) ) {
                     ?>
@@ -125,6 +127,14 @@
   <!--Main layout-->
 
   <!--Footer-->
-
+  <script>
+      $(document).ready(function(){
+      $('input.typeahead').typeahead({
+          name: 'typeahead',
+          remote:'search.php?key=%QUERY',
+          limit : 10
+      });
+  });
+      </script>
 
 <?php include("../../layout/foot.php"); ?>

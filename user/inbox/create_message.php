@@ -43,8 +43,7 @@
 
                       <!--Featured Image-->
 
-                      <div class="card wow fadeIn thin">
-                          <div class="card-body">
+
                             <?php
                             require_once '../../core/config.php';
                             if($_GET['user_id']) {
@@ -53,24 +52,38 @@
                                 $result = $connect->query($sql);
                                 $data = $result->fetch_assoc();
                                 ?>
-                                <div class="form-group">
-                                    <label for="postForm">Subject</label>
-                                    <input class="form-control" id="pet_name" name="pet_name" type="text" value="<?php echo $data['username']?>"></input>
-                                    <div class="invalid-feedback">
-                                      Please input your pet name
+                                <form method="post" action="action/send.php">
+                                <div class="card wow fadeIn thin" >
+                                    <div class="card-body">
+                                      <div class="form-group">
+                                          <label for="postForm">From</label>
+                                          <input class="form-control" id="from" name="from" type="hidden" value="<?php echo $data['user_id']?>" ></input>
+                                          <input class="form-control" type="text" value="<?php echo $data['username']; ?>" disabled></input>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="postForm">To</label>
+                                          <input class="form-control" id="receiver" name="receiver" type="text" required value="<?php echo $data['user_id']?>"></input>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="postForm">Subject</label>
+                                          <input class="form-control" id="subject" name="subject" type="text" required></input>
+                                      </div>
+
+
+                                    </div>
+                                    <div class="card-footer">
+                                      <div class="form-group">
+                                        <textarea name="editor1" id="content"></textarea>
+                                    </div>
+                                         <button class="btn btn-info " type="submit">Send</button>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                <textarea name="editor1"></textarea>
-                              </div>
+                              </form>
                               <?php } ?>
                           </div>
 
 
-                          <div class="card-footer">
 
-                               <button class="btn btn-info " style="float:right" type="submit">post</button>
-                          </div>
 
                       </div>
                   </div>
@@ -82,7 +95,22 @@
 
       </div>
   </main>
-		<script>
-			CKEDITOR.replace( 'editor1' );
-		</script>
+  <script>
+  ClassicEditor
+  .create( document.querySelector( '#content' ),
+  {
+      cloudServices: {
+          tokenUrl: 'https://35508.cke-cs.com/token/dev/HsFzvs1xgvvwdno5qQLXFAfumf92hTtKYEzcY1yYH3KIFtf4a8RzpfNShoVM',
+          uploadUrl: 'https://35508.cke-cs.com/easyimage/upload/'
+      }
+  }
+ )
+  .then( editor => {
+      console.log( editor );
+  } )
+  .catch( error => {
+      console.error( error );
+  } );
+
+  </script>
 <?php include("../../layout/foot.php"); ?>

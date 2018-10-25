@@ -64,11 +64,12 @@
                                 <input class="form-control" id="subject" name="subject" type="text" required></input>
                             </div>
 
+
+                          </div>
+                          <div class="card-footer">
                             <div class="form-group">
                               <textarea name="editor1" id="content"></textarea>
                           </div>
-                          </div>
-                          <div class="card-footer">
                                <button class="btn btn-info " style="float:right" type="submit">post</button>
                           </div>
                       </div>

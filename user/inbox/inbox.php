@@ -52,6 +52,7 @@
                                   <th scope="col" class="text-center">Sender</th>
                                   <th scope="col" class="text-center">Subject</th>
                                   <th scope="col" class="text-center">Datetime</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                               </thead>
                               <tbody>
