@@ -1,10 +1,3 @@
-<?php
-    session_start();
-    if(!isset($_SESSION['user'])){
-        header('Location: ../login');
-    }
-    else{
-        ?>
 <?php include("../layout/head.php"); ?>
 <?php include("../layout/side.php"); ?>
 <!-- Sidebar -->
@@ -311,7 +304,3 @@
 
     <!-- /.content-wrapper -->
     <?php include("../layout/foot.php"); ?>
-
-    <?php
-    }
-?>
